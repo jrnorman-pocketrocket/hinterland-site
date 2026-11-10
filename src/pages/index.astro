@@ -1,0 +1,164 @@
+---
+import Base from '../layouts/Base.astro';
+import TrailerCard from '../components/TrailerCard.astro';
+import Steps from '../components/Steps.astro';
+import Faq from '../components/Faq.astro';
+import Tag from '../components/Tag.astro';
+import Photo from '../components/Photo.astro';
+import { business, trailers, locations, reviews, faqs, pickup } from '../data/site';
+
+const loc = locations[0];
+const lowest = Math.min(...trailers.flatMap((t) => t.prices.map((p) => p.amount)));
+const first = trailers[0];
+const bookHref = trailers.length === 1 ? `/trailers/${first.slug}/#book` : '#trailers';
+const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(loc.mapsQuery)}&z=14&output=embed`;
+const directions = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(loc.mapsQuery)}`;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': `${business.url}/#business`,
+  name: business.name,
+  url: business.url,
+  telephone: business.phoneIntl,
+  email: business.email,
+  image: `${business.url}/images/og.jpg`,
+  logo: `${business.url}/images/logo-full.png`,
+  priceRange: `$${lowest} to $${Math.max(...trailers.flatMap((t) => t.prices.map((p) => p.amount)))}`,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: loc.address,
+    addressLocality: loc.suburb,
+    addressRegion: 'QLD',
+    postalCode: loc.postcode,
+    addressCountry: 'AU',
+  },
+  areaServed: business.serviceAreas.map((a) => ({ '@type': 'Place', name: `${a}, QLD` })),
+  openingHoursSpecification: [{
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    opens: '06:00',
+    closes: '17:00',
+  }],
+};
+---
+<Base
+  title="Trailer Hire Landsborough | Hinterland Trailer Hire, Sunshine Coast"
+  description={`Local trailer hire in Landsborough on the Sunshine Coast Hinterland. 8x5 cage tipper from $${lowest}. Book online in minutes, no bond.`}
+  schema={schema}
+>
+  <section class="hero">
+    <picture>
+      <source media="(max-width: 700px)" srcset="/images/pickup-corner-800.webp" />
+      <img src="/images/pickup-corner-1600.webp" alt="Hinterland Trailer Hire cage trailer parked at the Tunnel Ridge Rd pickup point" width="1600" height="1200" fetchpriority="high" />
+    </picture>
+    <div class="wrap">
+      <Tag a="Landsborough" b="Sunshine Coast Hinterland" />
+      <h1>Trailer hire, done simply.</h1>
+      <p>A clean, galvanised 8x5 cage tipper for tip runs, moving day and Marketplace pickups. Book online in a couple of minutes and pick up just off Tunnel Ridge Rd.</p>
+      <div class="price-chip">
+        {first.prices.map((p) => <span><strong>${p.amount}</strong> {p.label.toLowerCase()}</span>)}
+        <span>No bond</span>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn--go" href={bookHref}>Check availability</a>
+        <a class="btn btn--ghost" href="/how-it-works/">How it works</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust" aria-label="Why hire with us">
+    <div class="wrap">
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 21l1.6-7L2 9.2l7.1-.6z"/></svg>5-star Google reviews</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-5.6 7-12a7 7 0 1 0-14 0c0 6.4 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>Local to Landsborough</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V5z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>Inspected and insured</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>6am to 5pm, 7 days</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="trailers">
+    <div class="wrap">
+      <Tag a="Our" b="Trailers" />
+      <h2>Pick your trailer</h2>
+      <p class="lede">Simple pricing, no bond, no surprises. Every trailer is roadworthy, regularly inspected and insured.</p>
+      <div class="cards">
+        {trailers.map((t) => <TrailerCard trailer={t} />)}
+        {trailers.length < 3 && (
+          <div class="card card--soon">
+            <h3>More trailers coming</h3>
+            <p>We’re growing the fleet across the hinterland. Need something bigger or a different style? Let us know and we’ll tell you when it lands.</p>
+            <a href={`sms:${business.phoneIntl}`}>Text us what you need</a>
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--forest">
+    <div class="wrap">
+      <Tag a="How it" b="Works" />
+      <h2>Booked in minutes</h2>
+      <p class="lede">No forms to print, no calendar back and forth. Book, pay and get your pickup details in one go.</p>
+      <Steps />
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="wrap split">
+      <div>
+        <Tag a="What" b="Locals say" />
+        <h2>Small, local and looked after</h2>
+        {reviews.map((r) => (
+          <figure class="review" style="margin:1.5rem 0">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <blockquote>{r.text}</blockquote>
+            <figcaption><cite>{r.name}</cite>, Google review</figcaption>
+          </figure>
+        ))}
+        <a href={business.googleReviewsUrl} rel="noopener">Read more reviews on Google</a>
+      </div>
+      <Photo src="/images/trailer-sticker" alt="Galvanised mudguard and cage on the Hinterland hire trailer" />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap split">
+      <div>
+        <Tag a="Pickup" b={loc.name} />
+        <h2>Where to find us</h2>
+        <p class="lede">{loc.blurb}</p>
+        <ul class="facts">
+          <li><b>Address</b><span>{loc.address}, {loc.suburb} QLD {loc.postcode}</span></li>
+          <li><b>Hours</b><span>{loc.hours}</span></li>
+          <li><b>Pickup</b><span>{pickup.mode === 'self-serve' ? pickup.selfServe.short : pickup.staffed.short}</span></li>
+        </ul>
+        <div class="btn-row">
+          <a class="btn btn--blue" href={directions} rel="noopener">Get directions</a>
+          <a class="btn btn--ghost" href={`tel:${business.phoneIntl}`}>Call {business.phoneDisplay}</a>
+        </div>
+      </div>
+      <iframe class="map" src={mapSrc} title={`Map of the pickup point at ${loc.address}, ${loc.suburb}`} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="wrap">
+      <Tag a="Quick" b="Answers" />
+      <h2>Good to know</h2>
+      <Faq items={faqs.slice(0, 5)} />
+      <p style="margin-top:1.5rem"><a href="/how-it-works/">All questions and hire details</a></p>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap">
+      <div>
+        <h2>Got a job this weekend?</h2>
+        <p>From ${lowest}. Book online now, or call or text {business.phoneDisplay}.</p>
+      </div>
+      <a class="btn btn--go" href={bookHref}>Check availability</a>
+    </div>
+  </section>
+</Base>

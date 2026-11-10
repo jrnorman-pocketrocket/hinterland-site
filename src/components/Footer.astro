@@ -1,0 +1,41 @@
+---
+import { business, trailers, locations } from '../data/site';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img class="foot-logo" src="/images/logo-bands.webp" alt={business.name} width="220" height="96" loading="lazy" />
+        <p>Local trailer hire for the {business.region}. Based in Landsborough, close to {business.serviceAreas.slice(1, 4).join(', ')}.</p>
+      </div>
+      <div>
+        <h4>Trailers</h4>
+        <ul>
+          {trailers.map((t) => <li><a href={`/trailers/${t.slug}/`}>{t.name}</a></li>)}
+        </ul>
+      </div>
+      <div>
+        <h4>Help</h4>
+        <ul>
+          <li><a href="/how-it-works/">How it works and FAQ</a></li>
+          <li><a href="/towing-guide/">Towing guide</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Talk to us</h4>
+        <ul>
+          <li><a href={`tel:${business.phoneIntl}`}>Call {business.phoneDisplay}</a></li>
+          <li><a href={`sms:${business.phoneIntl}`}>Text {business.phoneDisplay}</a></li>
+          <li><a href={`mailto:${business.email}`}>Email us</a></li>
+          {locations.map((l) => <li>{l.address}, {l.suburb}</li>)}
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>&copy; {year} {business.name}</span>
+      <span>Roadworthy, regularly inspected and insured.</span>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,27 @@
+---
+// The Lockii booking slot. Lockii handles dates, ID check, payment and confirmation.
+// 1. If the trailer has Lockii embed code, it renders here.
+// 2. Otherwise, if a Lockii hosted booking page is set, show a button to it.
+// 3. Otherwise (draft only), show a placeholder with a call/text fallback.
+import { business, booking, type Trailer } from '../data/site';
+interface Props { trailer: Trailer }
+const { trailer } = Astro.props;
+const embed = trailer.lockii.embedHtml.trim();
+---
+<div class="booking" id="book">
+  {embed ? (
+    <Fragment set:html={embed} />
+  ) : booking.hostedUrl ? (
+    <a class="btn btn--go" style="width:100%" href={booking.hostedUrl}>Check availability and book</a>
+  ) : (
+    <div class="booking-placeholder">
+      <strong>Lockii booking calendar goes here</strong>
+      <p>Live dates, ID check and card payment, all in one checkout.</p>
+      <div class="btn-row" style="justify-content:center">
+        <a class="btn btn--blue" href={`sms:${business.phoneIntl}`}>Text to book</a>
+        <a class="btn btn--ghost" href={`tel:${business.phoneIntl}`}>Call {business.phoneDisplay}</a>
+      </div>
+    </div>
+  )}
+  <p class="note">{booking.paymentNote} No bond.</p>
+</div>

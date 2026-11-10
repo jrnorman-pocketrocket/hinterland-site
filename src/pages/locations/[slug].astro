@@ -1,0 +1,38 @@
+---
+// Location pages are generated only for locations with `page: true` in src/data/site.ts.
+import Base from '../../layouts/Base.astro';
+import TrailerCard from '../../components/TrailerCard.astro';
+import Tag from '../../components/Tag.astro';
+import { business, locations, trailers, type Location } from '../../data/site';
+
+export function getStaticPaths() {
+  return locations.filter((l) => l.page).map((l) => ({ params: { slug: l.slug }, props: { location: l } }));
+}
+
+const { location: loc } = Astro.props as { location: Location };
+const here = trailers.filter((t) => t.locationId === loc.id);
+const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(loc.mapsQuery)}&z=14&output=embed`;
+---
+<Base
+  title={`Trailer Hire ${loc.suburb} | ${business.name}`}
+  description={`Local trailer hire in ${loc.suburb}, Sunshine Coast Hinterland. Book online, pick up at ${loc.address}.`}
+>
+  <section class="section" style="padding-top:3rem">
+    <div class="wrap">
+      <Tag a="Trailer hire" b={loc.suburb} />
+      <h1>Trailer hire in {loc.suburb}</h1>
+      <p class="lede">{loc.blurb}</p>
+      <div class="cards">{here.map((t) => <TrailerCard trailer={t} />)}</div>
+    </div>
+  </section>
+  <section class="section section--white">
+    <div class="wrap split">
+      <div>
+        <h2>Pickup point</h2>
+        <p class="lede">{loc.address}, {loc.suburb} QLD {loc.postcode}</p>
+        <p>{loc.hours}</p>
+      </div>
+      <iframe class="map" src={mapSrc} title={`Map of ${loc.address}, ${loc.suburb}`} loading="lazy"></iframe>
+    </div>
+  </section>
+</Base>

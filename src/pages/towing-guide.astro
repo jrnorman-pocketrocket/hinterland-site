@@ -1,0 +1,93 @@
+---
+import Base from '../layouts/Base.astro';
+import Tag from '../components/Tag.astro';
+import { business } from '../data/site';
+const tel = `tel:${business.phoneIntl}`;
+---
+<Base
+  title="Trailer Towing Guide for First-Timers | Hinterland Trailer Hire"
+  description="How to hitch, load and tow a hire trailer safely, plus Queensland towing rules and what to do if something goes wrong."
+>
+  <section class="section" style="padding-top:3rem">
+    <div class="wrap prose">
+      <Tag a="Towing" b="Guide" />
+      <h1>Tow it safely</h1>
+      <p class="lede">Never towed before? Not a problem. Five minutes here covers everything you need for a safe, easy hire.</p>
+      <ul class="toc">
+        <li><a href="#hitching">Hitching up</a></li>
+        <li><a href="#loading">Loading</a></li>
+        <li><a href="#driving">On the road</a></li>
+        <li><a href="#unloading">Unloading</a></li>
+        <li><a href="#rules">QLD rules</a></li>
+        <li><a href="#help">If something goes wrong</a></li>
+      </ul>
+
+      <h2 id="hitching">Hitching up</h2>
+      <ol>
+        <li>Back your vehicle up so the 50mm towball sits under the trailer’s coupling.</li>
+        <li>Wind the jockey wheel until the coupling sits fully on the ball.</li>
+        <li>Pull the red handle up, open the safety latch, then push the handle fully down and lock the latch with the carabiner.</li>
+        <li>Plug in the 7-pin flat connector. Use the adaptor on the trailer if your plug is different.</li>
+        <li>Attach the safety chain.</li>
+        <li>Wind the jockey wheel up and stow it.</li>
+        <li>Walk around and check the brake lights, indicators and tail lights all work.</li>
+      </ol>
+      <div class="callout">Tyres should sit at <strong>40 psi</strong>. If anything looks damaged or isn’t working, don’t tow it. Call us on <a href={tel}>{business.phoneDisplay}</a>.</div>
+
+      <h2 id="loading">Loading</h2>
+      <ul>
+        <li>Put heavier items in the front half, close to your vehicle, and spread the weight evenly side to side.</li>
+        <li>Keep the load under 350kg and within your vehicle’s towing capacity.</li>
+        <li>Tie everything down with straps or rope. Use the cage sides as anchor points.</li>
+        <li>Nothing should stick out past the cage.</li>
+        <li>Cover loose rubbish or green waste so nothing blows out. A cargo net is available, just ask.</li>
+      </ul>
+
+      <h2 id="driving">On the road</h2>
+      <ul>
+        <li>Drive a little slower and leave extra room to stop.</li>
+        <li>Take corners wider than usual so the trailer clears kerbs.</li>
+        <li>Reversing: hold the bottom of the steering wheel and move your hand the way you want the trailer to go. Small movements, go slow.</li>
+        <li>Watch for sway in strong wind and slow down on wet roads.</li>
+        <li>Use a lower gear on hills to save your brakes.</li>
+        <li>On longer trips, stop and check the hitch, chain, lights and load.</li>
+      </ul>
+
+      <h2 id="unloading">Unloading</h2>
+      <ul>
+        <li>Park on level ground with the handbrake on.</li>
+        <li>Unload from the top and back first, and watch how the weight shifts.</li>
+        <li>At the tip, drop the tailgate and use the tipping deck. Keep people clear.</li>
+        <li>Lift with your legs, not your back.</li>
+        <li>Sweep out any leftovers before you return it.</li>
+      </ul>
+
+      <h2 id="rules">Queensland towing rules</h2>
+      <ul>
+        <li>The trailer plus its load can’t exceed what your vehicle is rated to tow.</li>
+        <li>Safety chain must be attached.</li>
+        <li>Load must be properly restrained.</li>
+        <li>Brake lights, indicators and number plate must be working and visible.</li>
+        <li>If the trailer blocks your normal rear view, you need towing mirrors.</li>
+        <li>No one can ride in the trailer.</li>
+        <li>Speed limits are the same as without a trailer, but drive to suit the road and the load.</li>
+      </ul>
+      <p>For the full rules, see the Queensland Government’s <a href="https://www.qld.gov.au/transport/safety/holiday-travel/towing-a-caravan-or-trailer" rel="noopener">towing vehicles and trailers</a> page.</p>
+
+      <h2 id="help">If something goes wrong</h2>
+      <h3>Breakdown or flat tyre</h3>
+      <ul>
+        <li>Pull off the road somewhere safe and turn your hazard lights on.</li>
+        <li>Don’t attempt a repair you’re unsure about.</li>
+        <li>Call us on <a href={tel}>{business.phoneDisplay}</a>.</li>
+      </ul>
+      <h3>Accident</h3>
+      <ul>
+        <li>Check everyone is okay. If anyone is hurt, call <strong>000</strong>.</li>
+        <li>If it’s safe, move off the road.</li>
+        <li>Swap details with anyone involved and take photos of the scene and damage.</li>
+        <li>Let us know as soon as you can on <a href={tel}>{business.phoneDisplay}</a>.</li>
+      </ul>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,47 @@
+---
+import Base from '../layouts/Base.astro';
+import Tag from '../components/Tag.astro';
+import { business, locations } from '../data/site';
+const loc = locations[0];
+const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(loc.mapsQuery)}&z=14&output=embed`;
+const directions = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(loc.mapsQuery)}`;
+---
+<Base
+  title="Contact Hinterland Trailer Hire | Landsborough QLD"
+  description={`Call or text ${business.phoneDisplay}. Trailer pickup at ${loc.address}, ${loc.suburb}. ${loc.hours}.`}
+>
+  <section class="section" style="padding-top:3rem">
+    <div class="wrap">
+      <Tag a="Get in" b="Touch" />
+      <h1>Talk to a local</h1>
+      <p class="lede">Most questions are answered on our <a href="/how-it-works/">FAQ</a>. For anything else, a text is the quickest way to reach us.</p>
+      <div class="contact-grid">
+        <div class="panel">
+          <h3>Text</h3>
+          <a class="big" href={`sms:${business.phoneIntl}`}>{business.phoneDisplay}</a>
+          <p class="note">Quickest reply</p>
+        </div>
+        <div class="panel">
+          <h3>Call</h3>
+          <a class="big" href={`tel:${business.phoneIntl}`}>{business.phoneDisplay}</a>
+          <p class="note">{loc.hours}</p>
+        </div>
+        <div class="panel">
+          <h3>Email</h3>
+          <a class="big" style="font-size:1.05rem" href={`mailto:${business.email}`}>{business.email}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section section--white">
+    <div class="wrap split">
+      <div>
+        <h2>Pickup point</h2>
+        <p class="lede">{loc.address}, {loc.suburb} QLD {loc.postcode}</p>
+        <p>{loc.blurb}</p>
+        <a class="btn btn--blue" href={directions} rel="noopener">Get directions</a>
+      </div>
+      <iframe class="map" src={mapSrc} title={`Map of ${loc.address}, ${loc.suburb}`} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+</Base>

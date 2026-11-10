@@ -1,0 +1,100 @@
+---
+import Base from '../../layouts/Base.astro';
+import Photo from '../../components/Photo.astro';
+import Booking from '../../components/Booking.astro';
+import Faq from '../../components/Faq.astro';
+import Tag from '../../components/Tag.astro';
+import { business, trailers, locations, faqs, pickup, type Trailer } from '../../data/site';
+
+export function getStaticPaths() {
+  return trailers.map((t) => ({ params: { slug: t.slug }, props: { trailer: t } }));
+}
+
+const { trailer: t } = Astro.props as { trailer: Trailer };
+const loc = locations.find((l) => l.id === t.locationId) ?? locations[0];
+const pickupSteps = pickup.mode === 'self-serve' ? pickup.selfServe.steps : pickup.staffed.steps;
+const low = Math.min(...t.prices.map((p) => p.amount));
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: `${t.name} hire, ${loc.suburb}`,
+  description: t.summary,
+  image: t.photos.map((p) => `${business.url}${p.src}-1600.webp`),
+  brand: { '@type': 'Brand', name: business.name },
+  offers: t.prices.map((p) => ({
+    '@type': 'Offer',
+    name: p.label,
+    price: p.amount,
+    priceCurrency: 'AUD',
+    availability: 'https://schema.org/InStock',
+    url: `${business.url}/trailers/${t.slug}/`,
+  })),
+};
+---
+<Base
+  title={`${t.name} Hire ${loc.suburb} from $${low} | ${business.name}`}
+  description={`Hire our ${t.name.toLowerCase()} in ${loc.suburb}, Sunshine Coast Hinterland. $${t.prices.map((p) => `${p.amount} ${p.label.toLowerCase()}`).join(', $')}. No bond, book online.`}
+  image={`${t.photos[0].src}-1600.webp`}
+  schema={schema}
+  bookHref="#book"
+>
+  <div class="wrap page-head">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/#trailers">Trailers</a> / {t.name}</nav>
+    <Tag a={loc.name} b={t.nickname ? `Meet ${t.nickname}` : 'Trailer hire'} />
+    <h1>{t.name}</h1>
+    <p class="lede">{t.summary}</p>
+  </div>
+
+  <section class="wrap trailer-grid" style="padding-bottom:4rem">
+    <div>
+      <div class="gallery">
+        <Photo class="main" src={t.photos[0].src} alt={t.photos[0].alt} eager sizes="(max-width: 920px) 100vw, 640px" />
+        {t.photos.length > 1 && (
+          <div class="thumbs">
+            {t.photos.slice(1, 4).map((p) => <Photo src={p.src} alt={p.alt} sizes="(max-width: 920px) 33vw, 210px" />)}
+          </div>
+        )}
+      </div>
+
+      <div class="panel" style="margin-top:1.5rem">
+        <h2 style="font-size:1.6rem">About this trailer</h2>
+        {t.description.map((d) => <p>{d}</p>)}
+        <h3 style="margin-top:1.5rem">Good for</h3>
+        <ul class="ticks">{t.goodFor.map((g) => <li>{g}</li>)}</ul>
+      </div>
+
+      <div class="panel">
+        <h2 style="font-size:1.6rem">Specs</h2>
+        <table class="specs">
+          <tbody>
+            {t.specs.map((s) => <tr><th scope="row">{s.label}</th><td>{s.value}</td></tr>)}
+          </tbody>
+        </table>
+        <p class="note">Check your vehicle’s towing capacity covers the trailer plus your load.</p>
+      </div>
+    </div>
+
+    <aside>
+      <div class="panel" style="position:sticky;top:92px">
+        <h2 style="font-size:1.6rem;margin-bottom:0.25rem">Book this trailer</h2>
+        <div class="price-row">
+          {t.prices.map((p) => <div><strong>${p.amount}</strong><span>{p.label}</span></div>)}
+        </div>
+        <Booking trailer={t} />
+        <hr style="border:0;border-top:1px solid var(--line);margin:1.5rem 0" />
+        <h3>Pickup</h3>
+        <p style="margin-bottom:0.5rem"><strong>{loc.address}, {loc.suburb}</strong><br />{loc.hours}</p>
+        <ul class="ticks" style="font-size:0.97rem">{pickupSteps.map((s) => <li>{s}</li>)}</ul>
+      </div>
+    </aside>
+  </section>
+
+  <section class="section section--white">
+    <div class="wrap">
+      <h2>Before you book</h2>
+      <Faq items={faqs.filter((f) => /need|bond|carry|extend/i.test(f.q))} />
+      <p style="margin-top:1.5rem">First time towing? Read our <a href="/towing-guide/">towing guide</a>.</p>
+    </div>
+  </section>
+</Base>

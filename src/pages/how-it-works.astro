@@ -1,0 +1,58 @@
+---
+import Base from '../layouts/Base.astro';
+import Steps from '../components/Steps.astro';
+import Faq from '../components/Faq.astro';
+import Tag from '../components/Tag.astro';
+import { business, faqs, pickup, locations } from '../data/site';
+const loc = locations[0];
+const pickupSteps = pickup.mode === 'self-serve' ? pickup.selfServe.steps : pickup.staffed.steps;
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
+---
+<Base
+  title="How Trailer Hire Works and FAQ | Hinterland Trailer Hire"
+  description="How to book, what you need, pickup and return in Landsborough, and answers to common trailer hire questions."
+  schema={faqSchema}
+>
+  <section class="section section--forest" style="padding-top:3rem">
+    <div class="wrap">
+      <Tag a="How it" b="Works" />
+      <h1>Book, tow, return</h1>
+      <p class="lede">The whole process takes a couple of minutes online. Here’s exactly what happens.</p>
+      <Steps />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap split" style="align-items:start">
+      <div>
+        <h2>What you need</h2>
+        <ul class="ticks">
+          <li>A full driver’s licence. Bring the physical card.</li>
+          <li>A vehicle with a 50mm towball.</li>
+          <li>A 7-pin flat plug. There’s an adaptor on the trailer if yours is different.</li>
+          <li>A towing capacity that covers the trailer plus your load.</li>
+        </ul>
+      </div>
+      <div>
+        <h2>At pickup</h2>
+        <p><strong>{loc.address}, {loc.suburb}</strong><br />{loc.hours}</p>
+        <ul class="ticks">{pickupSteps.map((s) => <li>{s}</li>)}</ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="wrap">
+      <Tag a="Common" b="Questions" />
+      <h2>FAQ</h2>
+      <Faq items={faqs} />
+      <div class="callout" style="max-width:50rem">
+        Still unsure? Call or text <a href={`tel:${business.phoneIntl}`}>{business.phoneDisplay}</a>. A real local person answers.
+      </div>
+    </div>
+  </section>
+</Base>

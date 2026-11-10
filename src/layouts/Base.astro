@@ -1,0 +1,52 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileBar from '../components/MobileBar.astro';
+import { business } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  schema?: object | object[];
+  bookHref?: string;
+}
+
+const { title, description, image = '/images/og.jpg', schema, bookHref } = Astro.props;
+const canonical = new URL(Astro.url.pathname, business.url).toString();
+const ogImage = new URL(image, business.url).toString();
+const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+---
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/favicon-bands.png" />
+    <meta name="theme-color" content="#2f69b2" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={business.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="en_AU" />
+    <meta name="twitter:card" content="summary_large_image" />
+    {schemas.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <Header bookHref={bookHref} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <MobileBar bookHref={bookHref} />
+  </body>
+</html>

@@ -1,0 +1,18 @@
+---
+import { pickup, locations } from '../data/site';
+const loc = locations[0];
+const isSelf = pickup.mode === 'self-serve';
+const steps = [
+  { title: 'Book online', text: 'Pick your trailer and times, then pay by card. Takes a couple of minutes on your phone.' },
+  {
+    title: isSelf ? 'Collect any time' : 'Meet us at pickup',
+    text: isSelf ? pickup.selfServe.short : `${loc.address}, ${loc.suburb}. ${pickup.staffed.short}`,
+  },
+  { title: 'Get the job done', text: 'Tip run, furniture, Marketplace find. Bring it back to the same spot when you’re finished.' },
+];
+---
+<ol class="steps">
+  {steps.map((s) => (
+    <li><h3>{s.title}</h3><p>{s.text}</p></li>
+  ))}
+</ol>

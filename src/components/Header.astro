@@ -1,0 +1,20 @@
+---
+import { business, trailers } from '../data/site';
+interface Props { bookHref?: string }
+const bookHref = Astro.props.bookHref ?? (trailers.length === 1 ? `/trailers/${trailers[0].slug}/#book` : '/#trailers');
+---
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label={`${business.name} home`}>
+      <img src="/images/logo-bands.webp" alt={business.name} width="240" height="105" />
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a class="nav-link" href="/#trailers">Trailers</a>
+      <a class="nav-link" href="/how-it-works/">How it works</a>
+      <a class="nav-link" href="/towing-guide/">Towing guide</a>
+      <a class="nav-link" href="/contact/">Contact</a>
+      <a class="nav-phone" href={`tel:${business.phoneIntl}`}>{business.phoneDisplay}</a>
+      <a class="btn btn--go" href={bookHref}>Book now</a>
+    </nav>
+  </div>
+</header>
