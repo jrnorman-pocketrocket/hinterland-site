@@ -104,13 +104,13 @@ export const trailers: Trailer[] = [
     ],
     goodFor: ['Tip runs and green waste', 'Moving furniture', 'Facebook Marketplace pickups', 'Garden and property cleanups', 'Tools and equipment'],
     specs: [
-      { label: 'Deck size', value: '8 x 5 ft (approx. 2.4 x 1.5 m)' },
+      { label: 'Internal deck', value: '2.4 x 1.5 m (8 x 5 ft)' },
       { label: 'Cage height', value: '600 mm' },
       { label: 'Max load', value: '350 kg' },
       { label: 'Unloading', value: 'Rear tailgate and tipping deck' },
       { label: 'Build', value: '2025, fully galvanised, single axle' },
       { label: 'Towball', value: '50 mm' },
-      { label: 'Plug', value: '7-pin flat (adaptor on board)' },
+      { label: 'Plug', value: '7-pin flat' },
       { label: 'Tyre pressure', value: '40 psi' },
     ],
     prices: [
@@ -141,7 +141,7 @@ export const faqs = [
   },
   {
     q: 'What do I need to hire a trailer?',
-    a: 'A full driver’s licence (bring the physical card), and a vehicle with a 50mm towball and a 7-pin flat plug. There’s an adaptor on the trailer if your plug is different. Check your vehicle’s towing capacity covers the trailer plus your load.',
+    a: 'A full driver’s licence (bring the physical card), and a vehicle with a 50mm towball and a 7-pin flat plug. If your vehicle has a different plug, bring your own adaptor. Check your vehicle’s towing capacity covers the trailer plus your load.',
   },
   {
     q: 'Is there a bond?',
@@ -161,7 +161,11 @@ export const faqs = [
   },
   {
     q: 'How much can I carry?',
-    a: 'Up to 350kg of load. Keep heavier items toward the front and cover anything that could blow out. A cargo net is available, just ask.',
+    a: 'Up to 350kg of load. Keep heavier items toward the front, and bring a tarp or net to cover anything that could blow out.',
+  },
+  {
+    q: 'Can I drive with the tailgate down?',
+    a: 'No. Never drive with the rear tailgate down, even for a short distance. Close and latch it on both sides before you move. If a load is too long to fit with the tailgate up, it\u2019s too long for this trailer.',
   },
   {
     q: 'What if something goes wrong?',
