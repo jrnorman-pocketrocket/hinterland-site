@@ -29,8 +29,11 @@ export const booking = {
   locationId: '',
   paymentNote: 'Pay securely by card when you book.',
 };
-export const lockiiBrowseUrl = () => (booking.companyId ? `https://lockii.app/${booking.companyId}/browse` : '');
-export const lockiiFindUrl = () => (booking.companyId ? `https://lockii.app/${booking.companyId}/find` : '');
+// Lockii's hosted pages. The documented lockii.app/<companyId>/browse format returned 404 when
+// tested, so these stay empty until the real links are copied from the Lockii dashboard.
+export const lockiiHosted = { browse: '', find: '' };
+export const lockiiBrowseUrl = () => lockiiHosted.browse;
+export const lockiiFindUrl = () => lockiiHosted.find;
 
 // How pickup works. Change `mode` to 'self-serve' once locks and GPS are fitted.
 export const pickup = {

@@ -1,31 +1,48 @@
 ---
 // The Lockii booking slot. Lockii handles dates, ID check, payment and confirmation.
-// 1. Company ID + product ID set: Lockii's checkout button for this trailer.
-// 2. Only company ID set: link to Lockii's hosted browse page.
-// 3. Neither (draft only): placeholder with a call/text fallback.
+// If Lockii's widget hasn't drawn anything after a few seconds (blocked, slow or down),
+// a fallback appears so customers can still book by text or phone.
 import { business, booking, lockiiBrowseUrl, type Trailer } from '../data/site';
 interface Props { trailer: Trailer }
 const { trailer } = Astro.props;
 const productId = trailer.lockii.productId.trim();
 const browse = lockiiBrowseUrl();
 const loc = booking.locationId || undefined;
+const live = Boolean(booking.companyId && productId);
 ---
 <div class="booking" id="book">
-  {booking.companyId && productId ? (
+  {live && (
     <div class="lockii-slot">
       <lockii-checkout-button product_id={productId} location_id={loc}></lockii-checkout-button>
     </div>
-  ) : browse ? (
-    <a class="btn btn--go" style="width:100%" href={browse}>Check availability and book</a>
-  ) : (
-    <div class="booking-placeholder">
-      <strong>Lockii booking button goes here</strong>
-      <p>Live dates, ID check and card payment, all in one checkout.</p>
-      <div class="btn-row" style="justify-content:center">
-        <a class="btn btn--blue" href={`sms:${business.phoneIntl}`}>Text to book</a>
-        <a class="btn btn--ghost" href={`tel:${business.phoneIntl}`}>Call {business.phoneDisplay}</a>
-      </div>
-    </div>
   )}
+  <div class="booking-fallback" hidden={live}>
+    {browse ? (
+      <a class="btn btn--go" style="width:100%" href={browse}>Check availability and book</a>
+    ) : (
+      <div class="booking-placeholder">
+        <strong>Book by text or phone</strong>
+        <p>Tell us the day and whether you need 4 hours or the full day.</p>
+        <div class="btn-row" style="justify-content:center">
+          <a class="btn btn--blue" href={`sms:${business.phoneIntl}`}>Text to book</a>
+          <a class="btn btn--ghost" href={`tel:${business.phoneIntl}`}>Call {business.phoneDisplay}</a>
+        </div>
+      </div>
+    )}
+  </div>
   <p class="note">{booking.paymentNote} No bond.</p>
 </div>
+{live && (
+  <script is:inline>
+    setTimeout(function () {
+      var el = document.querySelector('lockii-checkout-button');
+      var drawn = el && (el.getBoundingClientRect().height > 0 || (el.shadowRoot && el.shadowRoot.childElementCount) || el.childElementCount);
+      if (!drawn) {
+        var fb = document.querySelector('.booking-fallback');
+        var slot = document.querySelector('.lockii-slot');
+        if (fb) fb.hidden = false;
+        if (slot) slot.style.display = 'none';
+      }
+    }, 6000);
+  </script>
+)}
