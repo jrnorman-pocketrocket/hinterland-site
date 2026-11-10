@@ -23,9 +23,9 @@ export const business = {
 
 // Booking is handled entirely by Lockii (dates, ID check, payment, confirmation).
 // companyId: from Lockii > Settings > Website & Embeds (the data-lockii-id in the base script).
-// Each trailer also needs its Lockii productId (product_xxxxxxxx, from the product page URL).
+// Each trailer also needs its Lockii productId (from the product page URL).
 export const booking = {
-  companyId: '',
+  companyId: 'tqsfhzn',
   locationId: '',
   paymentNote: 'Pay securely by card when you book.',
 };
@@ -127,7 +127,7 @@ export const trailers: Trailer[] = [
       { src: '/images/trailer-rear', alt: 'Rear tailgate with the Hinterland Trailer Hire sign' },
       { src: '/images/trailer-sticker', alt: 'Close-up of the galvanised mudguard and cage' },
     ],
-    lockii: { productId: '' },
+    lockii: { productId: 'e033d1ff-cc4f-43ab-af6a-83f8ba1ff437' },
   },
 ];
 

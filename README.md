@@ -14,7 +14,7 @@ Almost everything lives in `src/data/site.ts`:
 
 ## Lockii
 
-1. Set `booking.companyId` (Lockii > Settings > Website & Embeds) and each trailer's `lockii.productId` (product_xxxxxxxx from the product page URL). The base script and checkout button switch on automatically.
+1. Set `booking.companyId` (Lockii > Settings > Website & Embeds) and each trailer's `lockii.productId` (from the product page URL). The base script and checkout button switch on automatically.
 2. In Lockii, allow the domain `www.hinterlandtrailerhire.com.au` if it asks for domain approval.
 
 ## Run locally
