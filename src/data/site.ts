@@ -69,6 +69,7 @@ export type Location = {
   postcode: string;
   mapsQuery: string;
   hours: string;
+  hoursShort: string;
   page: boolean;
   blurb: string;
 };
@@ -82,7 +83,8 @@ export const locations: Location[] = [
     address: 'Corner of Tunnel Ridge Rd and Kowald Rd',
     postcode: '4550',
     mapsQuery: 'Tunnel Ridge Rd and Kowald Rd, Landsborough QLD 4550',
-    hours: '6am to 5pm, 7 days',
+    hours: 'Mon to Sat 6am to 5:15pm. Sun 6am to 8am and 1pm to 5:15pm',
+    hoursShort: '7 days, from 6am',
     page: false,
     blurb: 'Easy access off Tunnel Ridge Rd, a few minutes from Landsborough town, Beerwah and Mooloolah.',
   },
@@ -134,7 +136,7 @@ export const trailers: Trailer[] = [
       { src: '/images/trailer-rear', alt: 'Rear tailgate with the Hinterland Trailer Hire sign' },
       { src: '/images/trailer-sticker', alt: 'Close-up of the galvanised mudguard and cage' },
     ],
-    lockii: { productId: 'e033d1ff-cc4f-43ab-af6a-83f8ba1ff437' },
+    lockii: { productId: 'product_e033d1ff-cc4f-43ab-af6a-83f8ba1ff437' },
   },
 ];
 
@@ -164,7 +166,7 @@ export const faqs = [
   },
   {
     q: 'What hours can I hire?',
-    a: 'Pickups and returns between 6am and 5pm, 7 days a week.',
+    a: 'Monday to Saturday, 6am to 5:15pm. Sunday, 6am to 8am and 1pm to 5:15pm.',
   },
   {
     q: 'Can I extend my hire?',
@@ -180,6 +182,6 @@ export const faqs = [
   },
   {
     q: 'What if something goes wrong?',
-    a: 'Pull over somewhere safe and call us on 0430 095 190. In an emergency, call 000 first. Our trailers are roadworthy, regularly inspected and insured.',
+    a: 'Pull over somewhere safe and call us on 0430 095 190. In an emergency, call 000 first. Our trailers are roadworthy and inspected before every hire.',
   },
 ];

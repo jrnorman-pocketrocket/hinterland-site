@@ -34,12 +34,11 @@ const schema = {
     addressCountry: 'AU',
   },
   areaServed: business.serviceAreas.map((a) => ({ '@type': 'Place', name: `${a}, QLD` })),
-  openingHoursSpecification: [{
-    '@type': 'OpeningHoursSpecification',
-    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-    opens: '06:00',
-    closes: '17:00',
-  }],
+  openingHoursSpecification: [
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '06:00', closes: '17:15' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Sunday', opens: '06:00', closes: '08:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Sunday', opens: '13:00', closes: '17:15' },
+  ],
 };
 ---
 <Base
@@ -72,8 +71,8 @@ const schema = {
       <ul>
         <li><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 21l1.6-7L2 9.2l7.1-.6z"/></svg>5-star Google reviews</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-5.6 7-12a7 7 0 1 0-14 0c0 6.4 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>Local to Landsborough</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V5z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>Inspected and insured</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>6am to 5pm, 7 days</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V5z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>Inspected before every hire</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>{loc.hoursShort}</li>
       </ul>
     </div>
   </section>
@@ -82,7 +81,7 @@ const schema = {
     <div class="wrap">
       <Tag a="Our" b="Trailers" />
       <h2>Pick your trailer</h2>
-      <p class="lede">Simple pricing, no bond, no surprises. Every trailer is roadworthy, regularly inspected and insured.</p>
+      <p class="lede">Simple pricing, no bond, no surprises. Every trailer is roadworthy and inspected before every hire.</p>
       <div class="cards">
         {trailers.map((t) => <TrailerCard trailer={t} />)}
         {trailers.length < 3 && (
