@@ -25,6 +25,10 @@ export const business = {
 // companyId: from Lockii > Settings > Website & Embeds (the data-lockii-id in the base script).
 // Each trailer also needs its Lockii productId (from the product page URL).
 export const booking = {
+  // Set to true once the Lockii subscription is live.
+  lockiiLive: false,
+  // Until Lockii is live, the Book button goes to the existing Google booking calendar.
+  interimUrl: 'https://calendar.app.google/uZyhoTuArbasSZVx7',
   companyId: 'tqsfhzn',
   locationId: '',
   paymentNote: 'Pay securely by card when you book.',

@@ -8,7 +8,7 @@ const { trailer } = Astro.props;
 const productId = trailer.lockii.productId.trim();
 const browse = lockiiBrowseUrl();
 const loc = booking.locationId || undefined;
-const live = Boolean(booking.companyId && productId);
+const live = Boolean(booking.lockiiLive && booking.companyId && productId);
 ---
 <div class="booking" id="book">
   {live && (
@@ -17,8 +17,11 @@ const live = Boolean(booking.companyId && productId);
     </div>
   )}
   <div class="booking-fallback" hidden={live}>
-    {browse ? (
-      <a class="btn btn--go" style="width:100%" href={browse}>Check availability and book</a>
+    {browse || booking.interimUrl ? (
+      <>
+        <a class="btn btn--go" style="width:100%" href={browse || booking.interimUrl} rel="noopener">Check availability and book</a>
+        <p class="note" style="text-align:center">Prefer to talk? Call or text <a href={`tel:${business.phoneIntl}`}>{business.phoneDisplay}</a></p>
+      </>
     ) : (
       <div class="booking-placeholder">
         <strong>Book by text or phone</strong>

@@ -38,7 +38,7 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
     <meta property="og:locale" content="en_AU" />
     <meta name="twitter:card" content="summary_large_image" />
     {schemas.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
-    {booking.companyId && <script is:inline data-lockii-id={booking.companyId} src="https://dash.lockii.app/widget.js"></script>}
+    {booking.lockiiLive && booking.companyId && <script is:inline data-lockii-id={booking.companyId} src="https://dash.lockii.app/widget.js"></script>}
     <slot name="head" />
   </head>
   <body>
