@@ -1,5 +1,6 @@
 ---
-import { business, trailers, locations } from '../data/site';
+import { business, trailers, locations, lockiiFindUrl } from '../data/site';
+const find = lockiiFindUrl();
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer">
@@ -21,6 +22,7 @@ const year = new Date().getFullYear();
           <li><a href="/how-it-works/">How it works and FAQ</a></li>
           <li><a href="/towing-guide/">Towing guide</a></li>
           <li><a href="/contact/">Contact</a></li>
+          {find && <li><a href={find}>Manage my booking</a></li>}
         </ul>
       </div>
       <div>

@@ -7,14 +7,14 @@ Static site built with Astro, hosted on GitHub Pages at www.hinterlandtrailerhir
 Almost everything lives in `src/data/site.ts`:
 
 - **Prices, specs, wording:** edit the trailer entry.
-- **Add a trailer type:** copy a trailer entry, change the details, add photos to `public/images` as `name-800.webp` and `name-1600.webp`, and paste the Lockii widget code into `lockii.embedHtml`. The card, trailer page and footer link appear automatically.
+- **Add a trailer type:** copy a trailer entry, change the details, add photos to `public/images` as `name-800.webp` and `name-1600.webp`, and paste its Lockii product ID into `lockii.productId`. The card, trailer page and footer link appear automatically.
 - **Another trailer of the same type:** add it as stock in Lockii. No site change needed.
 - **New location:** copy a location entry. Set `page: true` to publish a `/locations/<slug>/` page.
 - **Going self-serve:** change `pickup.mode` to `'self-serve'`. Pickup wording updates everywhere.
 
 ## Lockii
 
-1. Paste each product's widget code into that trailer's `lockii.embedHtml`, or set `booking.hostedUrl` to Lockii's hosted booking page.
+1. Set `booking.companyId` (Lockii > Settings > Website & Embeds) and each trailer's `lockii.productId` (product_xxxxxxxx from the product page URL). The base script and checkout button switch on automatically.
 2. In Lockii, allow the domain `www.hinterlandtrailerhire.com.au` if it asks for domain approval.
 
 ## Run locally

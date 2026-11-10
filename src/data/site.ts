@@ -2,7 +2,7 @@
 // Hinterland Trailer Hire: the one file to edit.
 //
 // Add a trailer: copy an entry in `trailers`, change the details, drop photos
-// into /public/images, and paste the Lockii widget code into `lockii.embedHtml`.
+// into /public/images, and paste its Lockii product ID into `lockii.productId`.
 // The site builds the card, the trailer page and the listings by itself.
 //
 // Add a location: copy an entry in `locations` and set `page: true` to give it
@@ -21,12 +21,16 @@ export const business = {
   facebookUrl: '',
 };
 
-// Booking is handled entirely by Lockii.
-// hostedUrl: Lockii's hosted booking page (fallback when a trailer has no embed).
+// Booking is handled entirely by Lockii (dates, ID check, payment, confirmation).
+// companyId: from Lockii > Settings > Website & Embeds (the data-lockii-id in the base script).
+// Each trailer also needs its Lockii productId (product_xxxxxxxx, from the product page URL).
 export const booking = {
-  hostedUrl: '',
+  companyId: '',
+  locationId: '',
   paymentNote: 'Pay securely by card when you book.',
 };
+export const lockiiBrowseUrl = () => (booking.companyId ? `https://lockii.app/${booking.companyId}/browse` : '');
+export const lockiiFindUrl = () => (booking.companyId ? `https://lockii.app/${booking.companyId}/find` : '');
 
 // How pickup works. Change `mode` to 'self-serve' once locks and GPS are fitted.
 export const pickup = {
@@ -88,7 +92,7 @@ export type Trailer = {
   specs: { label: string; value: string }[];
   prices: { label: string; amount: number }[];
   photos: { src: string; alt: string }[];
-  lockii: { productId: string; embedHtml: string };
+  lockii: { productId: string };
 };
 
 export const trailers: Trailer[] = [
@@ -123,7 +127,7 @@ export const trailers: Trailer[] = [
       { src: '/images/trailer-rear', alt: 'Rear tailgate with the Hinterland Trailer Hire sign' },
       { src: '/images/trailer-sticker', alt: 'Close-up of the galvanised mudguard and cage' },
     ],
-    lockii: { productId: '', embedHtml: '' },
+    lockii: { productId: '' },
   },
 ];
 
