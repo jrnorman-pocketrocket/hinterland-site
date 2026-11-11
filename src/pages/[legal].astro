@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import Tag from '../components/Tag.astro';
+import { legalPages } from '../legal';
+
+export function getStaticPaths() {
+  return legalPages.map((p) => ({ params: { legal: p.slug }, props: { page: p } }));
+}
+const { page } = Astro.props as { page: (typeof legalPages)[number] };
+---
+<Base title={`${page.title} | Hinterland Trailer Hire`} description={page.blurb}>
+  <section class="section" style="padding-top:3rem">
+    <div class="wrap prose legal">
+      <Tag a="Legal" b={page.title} />
+      <h1>{page.title}</h1>
+      <Fragment set:html={page.html} />
+      <p class="note" style="margin-top:2.5rem">Hinterland Trailer Hire is a business name of Salote Norman, sole trader, ABN 62 380 414 681, Landsborough QLD 4550.</p>
+    </div>
+  </section>
+</Base>

@@ -1,5 +1,6 @@
 ---
 import { business, trailers, locations, lockiiFindUrl } from '../data/site';
+import { legalPages } from '../legal';
 const find = lockiiFindUrl();
 const year = new Date().getFullYear();
 ---
@@ -36,8 +37,10 @@ const year = new Date().getFullYear();
       </div>
     </div>
     <div class="foot-base">
-      <span>&copy; {year} {business.name}</span>
-      <span>Roadworthy and inspected before every hire.</span>
+      <nav class="foot-legal" aria-label="Legal">
+        {legalPages.map((p) => <a href={`/${p.slug}/`}>{p.title}</a>)}
+      </nav>
+      <span>&copy; {year} {business.name}. A business name of Salote Norman, sole trader, ABN 62 380 414 681.</span>
     </div>
   </div>
 </footer>

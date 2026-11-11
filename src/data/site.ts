@@ -154,11 +154,11 @@ export const faqs = [
   },
   {
     q: 'What do I need to hire a trailer?',
-    a: 'A full driver’s licence (bring the physical card), and a vehicle with a 50mm towball and a 7-pin flat plug. If your vehicle has a different plug, bring your own adaptor. Check your vehicle’s towing capacity covers the trailer plus your load.',
+    a: 'A full (open) driver’s licence, so no learner or P plates. Bring the physical card. You also need a vehicle with a 50mm towball and a 7-pin flat plug. If your vehicle has a different plug, bring your own adaptor. Check your vehicle’s towing capacity covers the trailer plus your load.',
   },
   {
     q: 'Is there a bond?',
-    a: 'No bond. You pay the hire price and that’s it.',
+    a: 'No bond. You pay the hire price up front. Extra charges only apply for late returns, cleaning or damage, as set out in our rental agreement.',
   },
   {
     q: 'Where do I pick up and return?',
@@ -179,6 +179,10 @@ export const faqs = [
   {
     q: 'Can I drive with the tailgate down?',
     a: 'No. Never drive with the rear tailgate down, even for a short distance. Close and latch it on both sides before you move. If a load is too long to fit with the tailgate up, it\u2019s too long for this trailer.',
+  },
+  {
+    q: 'What if I need to cancel?',
+    a: 'More than 24 hours before pickup: full refund. Within 24 hours: 50% refund, or move your booking to another date for free. Wet weather? Move it free, even on the day. See our cancellation policy for the details.',
   },
   {
     q: 'What if something goes wrong?',
