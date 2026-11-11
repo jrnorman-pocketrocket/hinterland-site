@@ -25,6 +25,6 @@ export const legalPages = [
   { slug: 'rental-agreement', title: 'Rental Agreement', blurb: 'The terms you agree to when you hire a trailer.', html: tidy(rental) },
   { slug: 'cancellation-policy', title: 'Cancellation Policy', blurb: 'Cancelling, changing or moving your booking.', html: tidy(cancellation) },
   { slug: 'terms', title: 'Terms of Service', blurb: 'Using this website and our online booking system.', html: tidy(terms) },
-  { slug: 'privacy', title: 'Privacy Policy', blurb: 'How we handle your personal information.', html: tidy(privacy) },
+  { slug: 'privacy', title: 'Privacy Policy', blurb: 'What personal information we collect, why, and how we look after it.', html: tidy(privacy) },
   { slug: 'legal-notice', title: 'Legal Notice', blurb: 'Who runs this site.', html: tidy(legalNotice) },
 ];
