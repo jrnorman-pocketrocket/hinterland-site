@@ -110,24 +110,24 @@ export const trailers: Trailer[] = [
     name: '8x5 Cage Tipper Trailer',
     nickname: 'Shiny',
     locationId: 'landsborough',
-    summary: 'Galvanised 8x5 with a 600mm cage, rear tailgate and tipping deck. The all-rounder for tip runs and moving jobs.',
+    summary: 'Galvanised 8x5 with a 400mm cage, rear tailgate and tipping deck. The all-rounder for tip runs and moving jobs.',
     description: [
-      'A 2025-built, fully galvanised single-axle trailer from North Coast Trailers in Yandina. The 600mm cage keeps garden waste and bulky loads where they belong, and the rear tailgate and tipping deck make unloading at the tip quick.',
+      'A 2024-built, fully galvanised single-axle Stonegate trailer, bought from North Coast Trailers in Yandina. The 400mm cage keeps garden waste and bulky loads where they belong, and the rear tailgate and tipping deck make unloading at the tip quick.',
       'Tows behind most sedans, SUVs and utes fitted with a 50mm towball. Check your vehicle’s towing capacity before you book.',
     ],
     goodFor: ['Tip runs and green waste', 'Moving furniture', 'Facebook Marketplace pickups', 'Garden and property cleanups', 'Tools and equipment'],
     specs: [
       { label: 'Internal deck', value: '2.4 x 1.5 m (8 x 5 ft)' },
-      { label: 'Cage height', value: '600 mm' },
-      { label: 'Max load', value: '350 kg' },
+      { label: 'Cage height', value: '400 mm' },
+      { label: 'Max load', value: '400 kg' },
       { label: 'Unloading', value: 'Rear tailgate and tipping deck' },
-      { label: 'Build', value: '2025, fully galvanised, single axle' },
+      { label: 'Build', value: '2024 Stonegate, fully galvanised, single axle' },
       { label: 'Towball', value: '50 mm' },
       { label: 'Plug', value: '7-pin flat' },
-      { label: 'Tyre pressure', value: '40 psi' },
+      { label: 'Tyre pressure', value: '300 kPa (44 psi)' },
     ],
     prices: [
-      { label: 'Up to 4 hours', amount: 50 },
+      { label: 'Up to 4 hours', amount: 40 },
       { label: 'Full day', amount: 60 },
     ],
     photos: [
@@ -174,7 +174,7 @@ export const faqs = [
   },
   {
     q: 'How much can I carry?',
-    a: 'Up to 350kg of load. Keep heavier items toward the front, and bring a tarp or net to cover anything that could blow out.',
+    a: 'Up to 400kg of load. Keep heavier items toward the front, and bring a tarp or net to cover anything that could blow out.',
   },
   {
     q: 'Can I drive with the tailgate down?',
